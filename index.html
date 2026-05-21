@@ -35,55 +35,26 @@
     }
 
     body {
-      background-color: #0e0e10;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: var(--bg-dark);
       min-height: 100vh;
-      overflow: hidden;
       color: var(--text-dark);
+      overflow-x: hidden;
     }
 
-    /* Mobile Container Frame Simulation */
+    /* Mobile Container Frame Simulation - Removed Constraints */
     .phone-simulator {
       position: relative;
-      width: 390px;
-      height: 844px;
+      width: 100%;
+      min-height: 100vh;
       background-color: var(--bg-dark);
-      border: 8px solid #222;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
       display: flex;
       flex-direction: column;
       transition: background-color 0.3s;
     }
 
-    /* Hardware elements simulation */
-    .notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 130px;
-      height: 28px;
-      background-color: #222;
-      border-bottom-left-radius: 16px;
-      border-bottom-right-radius: 16px;
-      z-index: 1000;
-    }
-
-    .home-bar {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 4px;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 2px;
-      z-index: 1000;
-      pointer-events: none;
+    /* Hardware elements simulation - Hidden */
+    .notch, .home-bar {
+      display: none !important;
     }
 
     /* Scrollable Content wrapper */
@@ -91,8 +62,11 @@
       flex: 1;
       overflow-y: auto;
       padding: 16px;
-      padding-top: 96px; /* Space for header & marquee */
-      padding-bottom: 88px; /* Space for bottom tab bar */
+      padding-top: 104px; /* Space for header & marquee */
+      padding-bottom: 80px; /* Space for bottom tab bar */
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .screen-content::-webkit-scrollbar {
@@ -108,7 +82,7 @@
 
     /* ==================== 1. HEADER ==================== */
     header {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -119,7 +93,6 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      padding-top: 12px;
       z-index: 100;
       transition: background-color 0.3s, border-bottom-color 0.3s;
     }
@@ -170,7 +143,7 @@
 
     /* ==================== 2. MARQUEE BANNER ==================== */
     .marquee-container {
-      position: absolute;
+      position: fixed;
       top: 64px;
       left: 0;
       right: 0;
@@ -206,7 +179,7 @@
 
     /* ==================== 3. SPLASH SCREEN ==================== */
     .splash-screen {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background-color: var(--bg-dark);
       z-index: 500;
@@ -214,9 +187,10 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 24px;
-      padding-top: 64px;
+      padding-top: 80px;
       padding-bottom: 40px;
       transition: transform 0.4s ease-in-out;
+      overflow-y: auto;
     }
 
     .splash-screen.hidden {
@@ -348,7 +322,7 @@
 
     /* ==================== 4. LOADING OVERLAY ==================== */
     .loading-overlay {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background-color: rgba(250, 246, 236, 0.95);
       z-index: 400;
@@ -1309,19 +1283,20 @@
 
     /* ==================== 11. BOTTOM TAB BAR ==================== */
     nav {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 72px;
+      height: 64px;
       background-color: var(--bg-header);
       border-top: 2px solid #000;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      padding-bottom: 12px;
-      padding-top: 6px;
+      padding-bottom: 0;
+      padding-top: 0;
       z-index: 100;
       transition: background-color 0.3s;
+      align-items: center;
     }
 
     .tab-btn {
@@ -1389,7 +1364,7 @@
 
       <div class="splash-center">
         <div class="splash-logo-wrapper" onclick="triggerLogoTap()">
-          <img src="./src/assets/cockroach_emblem.png" class="splash-logo-img" alt="Cockroach Janta Party Logo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKRWyn_v3ya-e2awPMHNm1Adra-SeLiS432VfYxyX0X-nyYc7LgW0S8Ki-79xJ3y2uiV1weZaphxMaiX_kW1aobM0Z0RJz8MOBdhdVEr3VQmdr1Gy19DAjylI5znC3I_Az_qXp_1EpVbOz52jcM79dv6F6o-zwgrGjsGrBx1w0phOw0MY8UEtdvbT42zZZ/s300/images.jpeg" class="splash-logo-img" alt="Cockroach Janta Party Logo">
           <div class="splash-tap-badge">Tap 7x</div>
         </div>
 
@@ -1421,7 +1396,7 @@
     <!-- ==================== CORE HEADER ==================== -->
     <header>
       <div class="header-logo-area" onclick="triggerLogoTap()">
-        <img src="./src/assets/cockroach_emblem.png" class="header-logo-img" alt="emblem mini">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKRWyn_v3ya-e2awPMHNm1Adra-SeLiS432VfYxyX0X-nyYc7LgW0S8Ki-79xJ3y2uiV1weZaphxMaiX_kW1aobM0Z0RJz8MOBdhdVEr3VQmdr1Gy19DAjylI5znC3I_Az_qXp_1EpVbOz52jcM79dv6F6o-zwgrGjsGrBx1w0phOw0MY8UEtdvbT42zZZ/s300/images.jpeg" class="header-logo-img" alt="emblem mini">
         <div class="header-title-box">
           <h1 id="headerMainTitle">COCKROACH <span style="color: var(--color-green)" id="headerJantaSpan">JANTA</span></h1>
           <span>Voice of the Lazy</span>
@@ -1787,7 +1762,7 @@
             <div class="success-card-badge">ACTIVE</div>
           </div>
           <div class="success-card-body">
-            <img src="./src/assets/cockroach_emblem.png" class="success-card-avatar" alt="Avatar">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKRWyn_v3ya-e2awPMHNm1Adra-SeLiS432VfYxyX0X-nyYc7LgW0S8Ki-79xJ3y2uiV1weZaphxMaiX_kW1aobM0Z0RJz8MOBdhdVEr3VQmdr1Gy19DAjylI5znC3I_Az_qXp_1EpVbOz52jcM79dv6F6o-zwgrGjsGrBx1w0phOw0MY8UEtdvbT42zZZ/s300/images.jpeg" class="success-card-avatar" alt="Avatar">
             <div class="success-card-details">
               <p><strong>Name:</strong> <span id="cardName">N/A</span></p>
               <p><strong>Member ID:</strong> <span id="cardId">CJP-000000</span></p>
